@@ -1,0 +1,36 @@
+@media screen and (max-width: 500px) {
+	#searchForm {
+		position: relative;
+		left: 200px;
+	}
+}
+#footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	background: white;
+	visibility: visible;
+}
+
+#sidebar {
+	position: fixed;
+	right: 0;
+	top: 100;
+	height: 100%;
+	width: 100px;
+	background: teal;
+	visibility: hidden;
+}
+body {
+	background-color: white;
+	text-align: center;
+}
+
+#header {
+	position: relative;
+	top: 40px;
+}
+
+
