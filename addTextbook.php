@@ -11,13 +11,6 @@ $B = $_POST['ISBN'];
 $C = $_POST['Author'];
 $D = $_POST['Course'];
 
-$query = "INSERT INTO LISTINGS(id, title, ISBN, author, course) VALUES(19, '" .  $A . "', '" . $B . "', '" . $C . "', '" . $D . "')";
-$result = mysql_query($query);
-if (!$result) die ("Failed to add record: " . mysql_error() . $query);
-if ($result)
-{
-	header('Location: add.php');
-	
-}
+echo($A);
 
     ?>

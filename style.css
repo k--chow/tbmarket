@@ -1,9 +1,5 @@
-@media screen and (max-width: 500px) {
-	#searchForm {
-		position: relative;
-		left: 200px;
-	}
-}
+
+
 #footer {
 	position: fixed;
 	left: 0;
@@ -31,6 +27,10 @@ body {
 #header {
 	position: relative;
 	top: 40px;
+}
+
+#query {
+	width: 50%;
 }
 
 

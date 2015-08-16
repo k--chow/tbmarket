@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <html>
 <head>
 <title> Textbook Market | </title> <!--add title-->
@@ -6,7 +6,8 @@
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="main.js"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
@@ -15,24 +16,28 @@
 
 <div id="header">
 <div class="row">
-<div class="col-sm-4">
+<div class="col-md-4 col-sm-12" >
 <a href=""><button type="button" class="btn btn-lg btn-success">Home</button></a>
 <button type="button" class="btn btn-lg btn-success">About</button>
 </div>
-<div class="col-sm-8">
-<h1 class="title">Textbook Market</h1><hr>
+<div class="col-md-8 col-sm-12">
+<h1 class="title"><kbd>Textbook Market</kbd>&nbsp; &nbsp;<small>Buy and sell textbooks!</small></h1><hr>
 </div>
 </div>
 <div id="main">
-
+<div id="container-fluid">
+<div class="col-xs-12 col-sm-12">
 <!--<button onclick="javascript: enter()">Enter</button>-->
 
 <form method="post" id="searchForm">
-	 <input type="text" style="width: 50%" id ="query" name="query" style="width: 50%" placeholder="Enter a textbook to buy or sell."/><br><br>
-	<input type="submit" value="Search Textbook"/><br><br>
+	<kbd>Enter a textbook to buy or sell<br> <br></kbd>
+	 <input type="text" id ="query" name="query" /><br><br>
+	<input type="submit" value="Search Textbook" class="btn btn-lg btn-success"/><br><br>
 </form>
 
 <div id="results"></div>
+</div>
+</div>
 </div>
 
 <!--<p id="status"></p>

@@ -18,6 +18,8 @@ $(document).ready(function() {
   searchBooks();
   return false;
  });
+
+ 
   window.fbAsyncInit = function() {
         FB.init({
           appId      : '471108896405092',
@@ -146,8 +148,8 @@ function searchBooks() {
                                     + "<br>Publisher: " + books[i].publisher
                                     + "<br><img src='" + books[i].image + "'/>"
                                     + "<br>Year: " + books[i].year
-                                    + "<br>Edition: " + books[i].edition
-                                    + "<br><button>Buy It</button><button onclick='sellBook(" + i + ")'>Sell It</button>");
+                                    //+ "<br>Edition: " + books[i].edition
+                                    + "<br><button type='button' onclick='buyBook(" + i + ")'class='btn btn-sm btn-info'>Buy It</button>" + " " + "<button class='btn btn-sm btn-info' onclick='sellBook(" + i + ")'>Sell It</button>");
 
        
 
@@ -156,14 +158,14 @@ function searchBooks() {
 
   });
 }
-
-function getInfo(soldby, fblink) {
+var title, author, ISBN, publisher, image, year, edition, soldby, price, condition, linkfb;
+function getInfo() {
       
       FB.api(
         "/me", function(response) {
         //document.getElementById("status").innerHTML = "Welcome, " + response.name;
-        soldby.value = response.name;
-        fblink.value = response.id;
+        soldby = response.name;
+        linkfb = response.id;
         });
       
     }
@@ -171,16 +173,83 @@ function getInfo(soldby, fblink) {
 
 function sellBook(i) {
   $('#results').html('');
-  $('#results').html('Listing for ' + books[i].title + ' by ' + books[i].author + '<br><br><form method="post"><input type="hidden" readonly="true" id="title"/><input type="hidden" readonly="true" id="authors"/><input type="hidden" readonly="true" id="ISBN"><input type="hidden" id="publisher" readonly="true"/><input type="hidden" id="image" readonly="true"/><input type="hidden" id="year"readonly="true"/><input type="hidden" id="edition" readonly="true"/><input type="hidden" readonly="true" id="soldby"><br><br>Price: $<input type="text" id="price"><input type="hidden" id="fblink"><br><br>Condition: <input type="text" id="condition"><br><br><input type="submit" value="Submit"><br><br></form>');
-document.getElementById('title').value = books[i].title;
-document.getElementById('authors').value = books[i].author;
-document.getElementById('ISBN').value = books[i].ISBN;
-document.getElementById('publisher').value = books[i].publisher;
-document.getElementById('image').value = books[i].image;
-document.getElementById('year').value = books[i].year;
-document.getElementById('edition').value = books[i].edition;
-var soldby = document.getElementById('soldby');
-var fblink = document.getElementById('fblink')
-getInfo(soldby, fblink);
+  title = books[i].title;
+  author = books[i].author;
+  ISBN = books[i].ISBN;
+  publisher = books[i].publisher;
+  image = books[i].image;
+  year = books[i].year;
+  $('#results').html('Listing for ' + books[i].title + ' by ' + books[i].author + '<br><br><form method="post" action="db2.php" id="sellIt">Edition #: <input type="text" id="edition" name="edition"/><br><br>Price: $<input type="text" id="price" name="price"><br><br>Condition: <input type="text" id="condition" name="condition"><br><br><input type="submit" value="Submit"><br><br></form>');
+  getInfo();
+  //console.log(title + " " + author + " " + ISBN + " " + publisher + " " + image + " " + year + " " + soldby + " " + fblink + " " + price + " " + edition + " " +condition);
+  $('#sellIt').submit(function() {
+  post();
+    return false;
+    
+  });
+}
+
+function buyBook(i) {
+   title = books[i].title;
+  author = books[i].author;
+  ISBN = books[i].ISBN;
+  publisher = books[i].publisher;
+  image = books[i].image;
+  year = books[i].year; 
+   
+   jQuery.ajax({
+    type: 'POST',
+    url: 'buybook.php/',
+    data: {A: title, B: author},
+    success: function(data) {
+     
+      $('#results').html(data);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(xhr.status + " " + thrownError);
+      
+    },
+    
+    
+
+  });
+}
+
+function post() {
+  price = document.getElementsByName('price')[0].value;
+  edition = document.getElementsByName('edition')[0].value;
+  condition = document.getElementsByName('condition')[0].value;
+  
+  var formData = { A: title, B: author, C: ISBN, D: publisher, E: image, F: year, G: edition, H: soldby, I: price, J: condition, K: linkfb};
+  //console.log(title + " " + author + " " + ISBN + " " + publisher + " " + image + " " + year + " " + soldby + " " + fblink + " " + price + " " + edition + " " +condition);
+  var url = 'db2.php/'
+  jQuery.ajax({
+    type: 'POST',
+    url: url,
+    data: formData,
+    success: function(data) {
+     
+      $('#results').html(data);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(xhr.status + " " + thrownError);
+      
+    },
+    
+    
+
+  });
   
 }
+
+
+function sendMessage(linkfb) {
+  FB.ui({
+  method: 'send',
+  link: 'https://apps.facebook.com/tbmarket/',
+  to: linkfb,
+
+});
+
+}
+
