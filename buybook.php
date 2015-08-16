@@ -24,10 +24,10 @@
 	echo "<h1>Listing for " . $title . " by </h1><h3> " . $author . "</h3>";
 	for ($i = 0; $i< $rows; ++$i)
 	{
-		echo '<br>Edition: ' . pg_fetch_result($result, $j, 'edition')	. '<br />';
-		echo 'Price: $'	. pg_fetch_result($result, $j, 'price')	. '<br />';
-		echo 'Condition: '	. pg_fetch_result($result, $j, 'condition')	. '<br />';
-		echo '<button class="btn btn-info" onclick="sendMessage('. pg_fetch_result($result, $j, 'linkfb') . ')">Message Seller</button><br />';
+		echo '<br>Edition: ' . pg_fetch_result($result, $i, 'edition')	. '<br />';
+		echo 'Price: $'	. pg_fetch_result($result, $i, 'price')	. '<br />';
+		echo 'Condition: '	. pg_fetch_result($result, $i, 'condition')	. '<br />';
+		echo '<button class="btn btn-info" onclick="sendMessage('. pg_fetch_result($result, $i, 'linkfb') . ')">Message Seller</button><br />';
 		
 	}
 

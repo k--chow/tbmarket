@@ -69,7 +69,7 @@ $(document).ready(function() {
       }
 
       
-     
+  
 
 });<!--end of ready-->
 
@@ -163,7 +163,7 @@ function getInfo() {
       
       FB.api(
         "/me", function(response) {
-        //document.getElementById("status").innerHTML = "Welcome, " + response.name;
+        
         soldby = response.name;
         linkfb = response.id;
         });
@@ -179,9 +179,9 @@ function sellBook(i) {
   publisher = books[i].publisher;
   image = books[i].image;
   year = books[i].year;
-  $('#results').html('Listing for ' + books[i].title + ' by ' + books[i].author + '<br><br><form method="post" action="db2.php" id="sellIt">Edition #: <input type="text" id="edition" name="edition"/><br><br>Price: $<input type="text" id="price" name="price"><br><br>Condition: <input type="text" id="condition" name="condition"><br><br><input type="submit" value="Submit"><br><br></form>');
+  $('#results').html('Listing for ' + books[i].title + ' by ' + books[i].author + '<br><br><form method="post" action="db2.php" id="sellIt">Edition: <input type="text" id="edition" name="edition" required onkeypress="return event.charCode >= 48 && event.charCode <= 57"/><br><br>Price: $ <input type="text" id="price" name="price" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46"><br><br>Condition: <select name ="condition" id ="condition" required><option value="poor">Poor</option><option value="average" required>Average</option><option value="Excellent">Excellent</option></select><br><br><input type="submit" value="Submit"><br><br></form>');
   getInfo();
-  //console.log(title + " " + author + " " + ISBN + " " + publisher + " " + image + " " + year + " " + soldby + " " + fblink + " " + price + " " + edition + " " +condition);
+  //console.log(title + " " + author + " " + ISBN + " " + publisher + " " + image + " " + year + " " + soldby + " " + linkfb + " " + price + " " + edition + " " +condition);
   $('#sellIt').submit(function() {
   post();
     return false;
@@ -253,3 +253,28 @@ function sendMessage(linkfb) {
 
 }
 
+function aboutPage() {
+  $('#results').html("<h3>Buy and sell your needed and unneeded textbooks within your university.</h3><p>Simply list your book, and buyers will message you. Simply search for a book and message sellers.</p>");
+}
+
+function getListings() {
+  getInfo();
+      
+  jQuery.ajax({
+    type: 'POST',
+    url: 'getlistings.php',
+    data: {A: linkfb},
+    success: function(data) {
+      console.log(linkfb);
+      $('#results').html(data);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(xhr.status + " " + thrownError);
+      
+    },
+    
+    
+
+  });
+  
+}

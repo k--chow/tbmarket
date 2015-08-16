@@ -18,7 +18,8 @@
 <div class="row">
 <div class="col-md-4 col-sm-12" >
 <a href=""><button type="button" class="btn btn-lg btn-success">Home</button></a>
-<button type="button" class="btn btn-lg btn-success">About</button>
+<button type="button" class="btn btn-lg btn-success" onclick="aboutPage()">About</button>
+<button type="button" class="btn btn-lg btn-success" onclick="getListings()">My Listings</button>
 </div>
 <div class="col-md-8 col-sm-12">
 <h1 class="title"><kbd>Textbook Market</kbd>&nbsp; &nbsp;<small>Buy and sell textbooks!</small></h1><hr>
@@ -28,13 +29,17 @@
 <div id="container-fluid">
 <div class="col-xs-12 col-sm-12">
 <!--<button onclick="javascript: enter()">Enter</button>-->
-
+<div id="bar">
 <form method="post" id="searchForm">
 	<kbd>Enter a textbook to buy or sell<br> <br></kbd>
 	 <input type="text" id ="query" name="query" /><br><br>
+	 <select name="network">
+	 <option value="" disabled selected>Choose a network</option>
+	 <option value="ufl">University of Florida</option>
+	 </select><br><br>
 	<input type="submit" value="Search Textbook" class="btn btn-lg btn-success"/><br><br>
 </form>
-
+</div><!--end of bar-->
 <div id="results"></div>
 </div>
 </div>
