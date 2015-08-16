@@ -8,6 +8,7 @@
 	/*$row = pg_fetch_row($result);
 	$yes = $row[0];
 	echo $yes;*/
+	$rows = pg_num_rows($result);
 	echo "<h1>Your Listings</h3>";
 	for ($i = 0; $i< $rows; ++$i)
 	{
