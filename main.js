@@ -183,10 +183,16 @@ function sellBook(i) {
   getInfo();
   //console.log(title + " " + author + " " + ISBN + " " + publisher + " " + image + " " + year + " " + soldby + " " + linkfb + " " + price + " " + edition + " " +condition);
   $('#sellIt').submit(function() {
+
   post();
     return false;
     
   });
+}
+
+function countListings() {
+  getInfo(); //for linkfb
+  //use GET for it!
 }
 
 function buyBook(i) {
@@ -206,7 +212,7 @@ function buyBook(i) {
       $('#results').html(data);
     },
     error: function(xhr, ajaxOptions, thrownError) {
-      alert(xhr.status + " " + thrownError);
+      //alert(xhr.status + " " + thrownError);
       
     },
     
@@ -269,7 +275,7 @@ function getListings() {
       $('#results').html(data);
     },
     error: function(xhr, ajaxOptions, thrownError) {
-      alert(xhr.status + " " + thrownError);
+      //alert(xhr.status + " " + thrownError);
       
     },
     
