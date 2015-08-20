@@ -15,7 +15,7 @@
 		echo '<br>Title: ' . pg_fetch_result($result, $i, 'title') . '<br>';
 		echo 'Author: ' . pg_fetch_result($result, $i, 'author')	. '<br>';
 		echo 'ISBN: $'	. pg_fetch_result($result, $i, 'ISBN')	. '<br>';
-		echo pg_fetch_result($result, $i, 'image')	. '<br>';
+		echo '<img src="' . pg_fetch_result($result, $i, 'image')	. '"></img>' . '<br>';
 		echo 'Price: '	. pg_fetch_result($result, $i, 'price')	. '<br>';
 		echo 'Condition: '	. pg_fetch_result($result, $i, 'condition')	. '<br>';
 		echo "<button>Delete this listing</button>";

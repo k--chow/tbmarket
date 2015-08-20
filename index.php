@@ -54,7 +54,7 @@
 </div>
 
 <div id="footer">
-<?php include('commons/footer.php');?>
+<!--<?php include('commons/footer.php');?>-->
 </div>
 
 </body>
