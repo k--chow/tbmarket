@@ -1,5 +1,4 @@
-
-
+/*
 #footer {
 	position: fixed;
 	left: 0;
@@ -8,29 +7,63 @@
 	width: 100%;
 	background: white;
 	visibility: visible;
-}
+}*/
 
-#sidebar {
-	position: fixed;
-	right: 0;
-	top: 100;
-	height: 100%;
-	width: 100px;
-	background: teal;
-	visibility: hidden;
-}
+
 body {
 	background-color: white;
 	text-align: center;
 }
 
-#header {
-	position: relative;
-	top: 40px;
-}
 
-#query {
+#tit {
 	width: 50%;
 }
 
+#ed {
+	width: 5%;
+}
 
+.result {
+	text-decoration: none;
+	color: black;
+}
+
+#results a:hover {
+	text-decoration: overline;
+	color: black;
+}
+
+
+#liner {
+	color: charcoal;
+}
+
+#title {
+	color: CadetBlue;
+	text-decoration: bold;
+	background-color: white;
+	margin-top: 0;
+}
+
+#tbmarket {
+	color: CadetBlue;
+}
+
+.navbar-nav.navbar-right:last-child {
+	margin-right: 0;
+}
+
+.navbar-brand {
+	position: relative;
+	top: -10px;
+}
+
+p {
+	color: CadetBlue;
+}
+
+#fav {
+	position: relative;
+	top: -10px;
+}

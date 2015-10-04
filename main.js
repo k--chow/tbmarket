@@ -13,12 +13,16 @@ var books = new Array(10);
 
 $(document).ready(function() {
  
- $('#searchForm').submit(function() {
+ $('#searchListingForm').submit(function() {
   
-  searchBooks();
+  getListings();
   return false;
  });
 
+ $('#searchForm').submit(function() {
+ searchBooks();
+ return false;
+ });
  
   window.fbAsyncInit = function() {
         FB.init({
@@ -119,6 +123,43 @@ $('#results').html(data);
           
       }
 
+function getListings() {
+  var tit = document.getElementsByName('tit')[0].value;
+  var ed = document.getElementsByName('ed')[0].value;
+  $.ajax({
+    type: 'POST',
+    url: 'buylistings.php',
+    data: {A: tit, C: ed },
+    success: function(data) {
+      $('#results').html(data);
+      
+    }
+  });
+  
+}
+
+function getMyListings() {
+  getInfo();
+      
+  jQuery.ajax({
+    type: 'POST',
+    url: 'getlistings.php',
+    data: {A: linkfb},
+    success: function(data) {
+      console.log(linkfb);
+      $('#results').html(data);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      //alert(xhr.status + " " + thrownError);
+      
+    },
+    
+    
+
+  });
+  
+}
+
 function searchBooks() {
   $('#results').html("<img src='http://jimpunk.net/Loading/wp-content/uploads/loading1.gif'></img>");
   var query = document.getElementsByName('query')[0].value;
@@ -149,7 +190,7 @@ function searchBooks() {
                                     + "<br><img src='" + books[i].image + "'/>"
                                     + "<br>Year: " + books[i].year
                                     //+ "<br>Edition: " + books[i].edition
-                                    + "<br><button type='button' onclick='buyBook(" + i + ")'class='btn btn-sm btn-info'>Buy It</button>" + " " + "<button class='btn btn-sm btn-info' onclick='sellBook(" + i + ")'>Sell It</button>");
+                                    + "<br>" + "<button class='btn btn-sm btn-info' onclick='sellBook(" + i + ")'>Sell It</button>");
 
        
 
@@ -157,6 +198,7 @@ function searchBooks() {
     }
 
   });
+
 }
 var title, author, ISBN, publisher, image, year, edition, soldby, price, condition, linkfb;
 function getInfo() {
@@ -204,7 +246,7 @@ function buyBook(i) {
   year = books[i].year; 
    
    jQuery.ajax({
-    type: 'POST',
+    type: 'GET',
     url: 'buybook.php/',
     data: {A: title, B: author},
     success: function(data) {
@@ -263,24 +305,19 @@ function aboutPage() {
   $('#results').html("<h3>Buy and sell your needed and unneeded textbooks within your university.</h3><p>Simply list your book, and buyers will message you. Simply search for a book and message sellers.</p>");
 }
 
-function getListings() {
-  getInfo();
-      
-  jQuery.ajax({
-    type: 'POST',
-    url: 'getlistings.php',
-    data: {A: linkfb},
-    success: function(data) {
-      console.log(linkfb);
-      $('#results').html(data);
-    },
-    error: function(xhr, ajaxOptions, thrownError) {
-      //alert(xhr.status + " " + thrownError);
-      
-    },
-    
-    
 
+function getEdition() {
+  $('editionForm').submit(function() {
+    var edition = document.getElementsByName('editionForm')[0].value;
+    jQuery.ajax({
+      type: 'GET',
+      url: 'getEdition.php',
+      data: {edition: edition},
+      success: function(data){
+        $('#results').html(data);
+      }
+    })
+    return false;
   });
-  
 }
+

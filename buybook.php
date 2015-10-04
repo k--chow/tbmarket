@@ -1,8 +1,8 @@
 <?php
 	$db = pg_connect('host=tbminstance.cggqgr2l3a54.us-west-2.rds.amazonaws.com port=5432 dbname=mydb user=kchow password=230497Ao')
 	or die ('Could not connect: ' . pg_last_error());
-	$title = $_POST['A'];
-	$authors = $_POST['B'];
+	$title = $_GET['A'];
+	$authors = $_GET['B'];
 	$count = count($authors);
 	$author= $authors[0];
 	for($k = 1; $k<$count; $k++)
@@ -21,7 +21,7 @@
 	$query = "Select * from ufl where title = '" . $title . "'";
 	$result = pg_query($db, $query) or die('Query failed: ' . pg_last_error());
 	$rows = pg_num_rows($result);
-	echo "<h1>Listing for " . $title . " by </h1><h3> " . $author . "</h3>";
+	echo "<h1>Listing for " . $title . " by </h1><h3> " . $author . "</h3>" . '<form method="get" id="editionForm"><input type="text" name="editionForm" required onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter an edition"/><br><br><input type="submit" value="Submit" class="btn btn-lg btn-success"/></form>';
 	for ($i = 0; $i< $rows; ++$i)
 	{
 		echo '<br>Edition: ' . pg_fetch_result($result, $i, 'edition')	. '<br />';

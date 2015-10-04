@@ -13,13 +13,13 @@
 	$condition = $_POST['J'];
 	$linkfb = $_POST['K'];
 	$query = "INSERT INTO ufl(title, author, ISBN, publisher, image, year, edition, soldby, price, condition, linkfb) values('" . $title ."', '" . $author . "', '" . $ISBN . "', '" . $publisher . "', '" . $image . "', '" . $year . "', '" . $edition . "', '" . $soldby . "', '" . $price . "', '" . $condition . "', '" . $linkfb . "')";
-	$result = pg_query($db, $query) or die('Query failed: ' . pg_last_error());
+	$result = pg_query($db, $query) or die('Query failed: ' . pg_last_error() . $query);
 	/*$row = pg_fetch_row($result);
 	$yes = $row[0];
 	echo $yes;*/
 	if ($result)
 	{
-		echo "Your listings has been created.";
+		echo "Your listings has been created. " . $query;
 	}
 	//echo $title . $author +  " " + $ISBN + " " + $publisher + " " + $image + " " + $year + " " + $edition + " " + $soldby + " " + $price + " " + $condition + " " + $linkfb;
 	pg_close($db);
